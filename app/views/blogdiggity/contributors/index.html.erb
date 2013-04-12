@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h2>Contributors</h2>
+</div>
+
+<table class="table table-striped">
+	<thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Github URL</th>
+      <th>Company</th>
+			<th>Location</th>
+    </tr>
+  </thead>
+  <tbody id="todos-table">
+  <% @contributors.each do |contributor| %>
+    <%= render :partial => 'contributor_row', :locals => { :contributor => contributor } %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to(new_contributor_path, :class => "btn btn-primary") do %>
+	<span><i class="icon-github-alt icon-white"></i> Join/Login As Contributor w/ Github</span>
+<% end %>

@@ -1,0 +1,13 @@
+<tr id="page-<%= page.id %>">
+  <td><%= page.title %></td>
+  <td><%= link_to page.slug, page.slug %></td>
+  <td><%= relative_time_ago(page.published_at, 'ago') %></td>
+  <td><%= page.repository.contributor.nickname if page.repository && page.repository.contributor %></td>
+  <td>
+	  <% unless page.published? %>
+	    <%= button_to "Publish", publish_page_path(page), :method => :put, :class => 'btn btn-small btn-success' %>
+	  <% else %>
+	    <%= button_to "Unpublish", unpublish_page_path(page), :method => :put, :class => 'btn btn-small btn-danger' %>
+	  <% end %>
+  </td>
+</tr>

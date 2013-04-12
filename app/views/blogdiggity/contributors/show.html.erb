@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h2>Blog Contributor <%= current_contributor.name %> ( <%= current_contributor.nickname %> )</h2>
+</div>
+
+<div class="well well-small">
+	<p>Email: <%= current_contributor.email %></p>
+	<p>Git URL:<%= current_contributor.github_url %></p>
+	<p>Company: <%= current_contributor.company %></p>
+	<p>Location: <%= current_contributor.location %></p>
+</div>
+
+<table class="table table-striped">
+	<thead>
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Description</th>
+      <th>Include?</th>
+    </tr>
+  </thead>
+  <tbody id="repos-table">
+  <% @repos.each do |repo| %>
+    <%= render :partial => 'repo_row', :locals => { :repo => repo } %>
+  <% end %>
+  </tbody>
+</table>

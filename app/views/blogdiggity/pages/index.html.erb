@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h2>Pages</h2>
+</div>
+
+<table class="table table-striped">
+	<thead>
+    <tr>
+      <th>Article</th>
+      <th>Slug</th>
+      <th>Published On</th>
+      <th>Contributed by</th>
+    </tr>
+  </thead>
+  <tbody id="pages-table">
+ 	  <% @pages.each do |page| %>
+      <%= render :partial => 'page_row', :locals => { :page => page } %>
+ 	  <% end %>
+  </tbody>
+</table>
+
+<%= link_to(seo_submit_path, :method => :post, :class => "btn btn-inverse") do %>
+	<span><i class="icon-cloud-upload icon-white"></i> Submit to Search Engines</span>
+<% end %>
