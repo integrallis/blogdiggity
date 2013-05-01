@@ -5,15 +5,17 @@ module Blogdiggity
     def show
       @page = Page.find_by_slug(params[:page])
       expires_in(5.minutes, public: true) unless Rails.env == "development"
-      if @page && stale?(:etag => @page, :last_modified => @page.updated_at, :public => true)
-        if @page.published? || Rails.env == "development"
-          rendered_page = Rails.cache.fetch(@page.slug) do
-            @page.rendered
-          end
+      if @page 
+        if stale?(:etag => @page, :last_modified => @page.updated_at, :public => true)
+          if @page.published? || Rails.env == "development"
+            rendered_page = Rails.cache.fetch(@page.slug) do
+              @page.rendered
+            end
           
-          render :text => rendered_page, :layout => 'application'
-        else
-          redirect_to :status => 404
+            render :text => rendered_page, :layout => 'application'
+          else
+            redirect_to :status => 404
+          end
         end
       else
         redirect_to :status => 404

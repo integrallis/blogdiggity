@@ -12,6 +12,7 @@ Bundler.require
 require "blogdiggity"
 require "jquery-rails"
 require "bootstrap-sass"
+require "rails-boilerplate"
 
 module Dummy
   class Application < Rails::Application

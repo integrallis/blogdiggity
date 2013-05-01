@@ -32,4 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 2.12.2"
   s.add_development_dependency "figaro", "~> 0.6"
   s.add_development_dependency "forward", "~> 0.3.1"
+  s.add_development_dependency "rails-boilerplate", "~> 0.1.9"
 end

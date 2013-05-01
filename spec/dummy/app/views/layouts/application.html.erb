@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <title>GitBlog</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+	<title>A Sample Blogdiggity Host App</title>
+	
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag 'modernizr' %>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="/">GitBlog</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="<%= active_path?(contributors_path) %>"><%= link_to "Contributors", contributors_path %></li>
-            <li class="<%= active_path?(pages_path) %>"><%= link_to "Pages", pages_path %></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <%= yield %>
-  </div> <!-- /container -->
+  <%= yield %>
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>
