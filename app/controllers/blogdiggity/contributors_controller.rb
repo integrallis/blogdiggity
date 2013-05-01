@@ -3,6 +3,9 @@ require 'open-uri'
 
 module Blogdiggity
   class ContributorsController < ApplicationController
+    
+    skip_before_filter :verify_authenticity_token, :only => [:webhook]
+    
     def index
       @contributors = Contributor.all
 
@@ -95,20 +98,22 @@ module Blogdiggity
           @repository.pages.where(:slug => path).destroy
         end if commit.removed
         
-        # processing modified files - invalidate the cache cached 
+        # processing modified files - invalidate the cache 
         commit.modified.each do |path|
-          Rails.cache.delete(path)
-          page = Page.find_by_slug(path)
-          page.touch
+          root_path = File.dirname(path)
+          extension = File.extname(path)
+          slug = (root_path == '.' ? '' : "#{root_path}/" ) + File.basename(path, extension) 
+          
+          Rails.cache.delete(slug)
+          page = Page.find_by_slug_and_extension(slug, extension)
+          page.touch if page
         end if commit.modified
         
-        puts ">>>>>>>>>>>>>>"
-        puts "timestamp ==> #{commit.timestamp}"
-        puts "added ==> #{commit.added}" # ===> call repo.pages.create(:slug => path)
-        puts "removed ==> #{commit.removed}" # ===> call Page.find_by_slug("#{params[:page]}.asciidoc").delete
-        puts "modified ==> #{commit.modified}" # ===> call Rails.cache.delete(path)
-        puts "author ==> #{commit.author}" # might need to rethink multi-authoring?
-        puts "<<<<<<<<<<<<<<"
+        console.debug "webhook: timestamp ==> #{commit.timestamp}"
+        console.debug "webhook: added ==> #{commit.added}" # ===> call repo.pages.create(:slug => path)
+        console.debug "webhook: removed ==> #{commit.removed}" # ===> call Page.find_by_slug("#{params[:page]}.asciidoc").delete
+        console.debug "webhook: modified ==> #{commit.modified}" # ===> call Rails.cache.delete(path)
+        console.debug "webhook: author ==> #{commit.author}" # might need to rethink multi-authoring?
       end
       render :nothing => true, :status => 200
     end

@@ -5,7 +5,7 @@ class Blogdiggity::ApplicationController < ApplicationController
   private
   
   def current_contributor
-    @contributor ||= Contributor.find(session[:contributor_id]) if session[:contributor_id]
+    @contributor ||= Blogdiggity::Contributor.find(session[:contributor_id]) if session[:contributor_id]
   end
 end
 

@@ -15,6 +15,9 @@ require "bootstrap-sass"
 require "rails-boilerplate"
 
 module Dummy
+  
+  Rails.logger = Logger.new(STDOUT)
+  
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -63,6 +66,17 @@ module Dummy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.before_configuration do
+      blogdiggity_config = File.join(Rails.root, 'config', 'blogdiggity.yml')
+      if File.exists?(blogdiggity_config)
+        YAML.load(File.open(blogdiggity_config)).each do |key, value|
+          ENV[key.to_s] = value
+        end 
+      else
+        Rails.logger.warn "Blogdiggity Github OAuth NOT configured!"
+      end
+    end
   end
 end
 
