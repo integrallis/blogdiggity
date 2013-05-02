@@ -4,6 +4,10 @@ module Blogdiggity
       "#{root_url}#{page.slug}"
     end
     
+    def current_page
+      @page
+    end
+    
   end
 end
 
