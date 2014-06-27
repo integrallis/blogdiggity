@@ -20,7 +20,7 @@ module Blogdiggity
 
     def create
       auth = request.env["omniauth.auth"]
-
+      binding.pry
       @contributor = Contributor.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s)
       @contributor.update_attributes(
         :name => auth['info']['name'] || '',

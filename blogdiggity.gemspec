@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'github_api', '~> 0.9'
   s.add_dependency 'asciidoctor', '~> 0.1'
   s.add_dependency 'jquery-rails', '~> 2.2'
-  s.add_dependency 'sass-rails', '~> 4.0.0'
-  s.add_dependency 'bootstrap-sass', '~> 3.1.0'
-  s.add_dependency 'coffee-rails', '~> 4.0.0'
+  s.add_dependency 'sass-rails', '~> 3.2.3'
+  s.add_dependency 'bootstrap-sass', '~> 2.3.1.0'
+  s.add_dependency 'coffee-rails', '~> 3.2.1'
   s.add_dependency 'font-awesome-sass-rails', ['~> 3.0', '>= 3.0.0.1']
   s.add_dependency 'pingr', '~> 0.0.3'
  
@@ -34,4 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'selenium-webdriver', '~> 2'
   s.add_development_dependency 'shoulda-matchers', '~> 2.0'
+  s.add_development_dependency 'fabrication'
+  s.add_development_dependency 'pry-rails'
+  s.add_development_dependency 'pry'
 end
