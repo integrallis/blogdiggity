@@ -5,7 +5,8 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 gem 'activerecord-postgresql-adapter'
-
+gem 'jquery-rails'
+gem 'unicorn'
 
 gem 'figaro'
 
@@ -16,5 +17,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'unicorn'
+group :test do
+  gem 'faker'
+  gem 'fabrication'
+end
+

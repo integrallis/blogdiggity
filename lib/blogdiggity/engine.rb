@@ -9,6 +9,7 @@ require 'pingr'
 require 'asciidoctor'
 require 'pry-rails'
 require 'figaro'
+require 'fabrication'
 
 module Blogdiggity
   class Engine < ::Rails::Engine
