@@ -14,6 +14,9 @@ Fabrication::Support.find_definitions
 OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
+  Fabrication.configure do |config|
+    config.path_prefix = ENGINE_RAILS_ROOT
+  end
 
   config.include(OmniauthMacros)
   config.include(ControllerMacros)
