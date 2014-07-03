@@ -20,5 +20,7 @@ end
 group :test do
   gem 'faker'
   gem 'fabrication'
+  gem 'database_cleaner', git: 'git@github.com:bmabey/database_cleaner.git'
 end
+
 

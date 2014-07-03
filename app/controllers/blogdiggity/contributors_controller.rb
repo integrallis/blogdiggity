@@ -72,8 +72,8 @@ module Blogdiggity
     def remove_repo
       @contributor = Contributor.find(params[:contributor_id])
       repository = Repository.find_by_name(params[:repo_name])
+      repository.pages.destroy_all
       repository.destroy
-
       redirect_to @contributor
     end
     

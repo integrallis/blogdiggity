@@ -9,7 +9,7 @@ ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 # in spec/support/ and its subdirectories.
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
 
-Fabrication::Support.find_definitions
+Fabrication.manager.load_definitions
 
 OmniAuth.config.test_mode = true
 
@@ -21,7 +21,31 @@ RSpec.configure do |config|
   config.include(OmniauthMacros)
   config.include(ControllerMacros)
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+
+
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
+
+  config.before(:all, callbacks: true) do
+    ActiveRecord::Base.skip_callbacks = false
+  end
+  
+  config.after(:all, callbacks: true) do
+    ActiveRecord::Base.skip_callbacks = true
+  end
+
+  ActiveRecord::Base.skip_callbacks = true
 end
+

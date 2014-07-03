@@ -9,8 +9,8 @@ module Blogdiggity
     belongs_to :contributor
     has_many :pages 
 
-    before_create :set_sha
-    after_create :configure
+    before_create :set_sha, unless: :skip_callbacks
+    after_create :configure, unless: :skip_callbacks
     
     ASCIIDOC_EXTENSIONS = ['.asciidoc', '.asc', '.txt']
 
@@ -30,7 +30,7 @@ module Blogdiggity
       self.sha = head_ref[:object][:sha]
     end
 
-    def configure
+   def configure
       # create pages
       page_paths.each do |path|
         ext = File.extname(path)
@@ -39,16 +39,17 @@ module Blogdiggity
       end
       
       # setup web hook 
-      callback_url = "#{self.root_url}#{Blogdiggity::Engine.routes._generate_prefix({})}/repository/#{self.name}/webhook"
-      
-      self.contributor.git.repos.hooks.create( 
-        self.contributor.nickname, 
+      unless (self.contributor.git.repos.hooks.list(self.contributor.nickname, self.name).empty? == false) 
+        callback_url = "#{self.root_url}#{Blogdiggity::Engine.routes._generate_prefix({})}/repository/#{self.name}/webhook"
+        self.contributor.git.repos.hooks.create( 
+              self.contributor.nickname, 
         self.name,
         { "name" => "web", 
           "active" => true, 
           "config" => { "url" => callback_url, "content_type" => "json" }
         }
-      )
+        )
+      end
     end
   end
 end

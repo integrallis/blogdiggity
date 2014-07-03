@@ -10,6 +10,8 @@ require 'asciidoctor'
 require 'pry-rails'
 require 'figaro'
 require 'fabrication'
+require 'faker'
+require 'database_cleaner'
 
 module Blogdiggity
   class Engine < ::Rails::Engine
