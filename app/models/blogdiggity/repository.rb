@@ -26,10 +26,16 @@ module Blogdiggity
     private
 
     def set_sha
-      head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
-      self.sha = head_ref[:object][:sha]
+      begin 
+        head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
+        self.sha = head_ref[:object][:sha]
+      rescue => e
+        self.contributor.git.repos.contents.create(self.contributor.nickname, self.name, 'initial.txt', path: '', content: 'initial commit', message: 'initial commit') 
+        head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
+        self.sha = head_ref[:object][:sha]
+      end
     end
-
+    
    def configure
       # create pages
       page_paths.each do |path|
