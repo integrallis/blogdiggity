@@ -2,7 +2,6 @@ require 'base64'
 
 module Blogdiggity
   class Repository < ActiveRecord::Base
-    
     attr_accessor :root_url
     attr_accessible :contributor_id, :name, :sha, :root_url
     
@@ -10,9 +9,10 @@ module Blogdiggity
     has_many :pages 
 
     before_create :set_sha, unless: :skip_callbacks
-    after_create :configure, unless: :skip_callbacks
+    #after_create :configure, unless: :skip_callbacks
     
     ASCIIDOC_EXTENSIONS = ['.asciidoc', '.asc', '.txt']
+
 
     def page_paths
       all = []
@@ -22,20 +22,19 @@ module Blogdiggity
       end
       all
     end
-
+   
     private
-
     def set_sha
-      begin 
+      begin   
         head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
         self.sha = head_ref[:object][:sha]
-      rescue => e
-        self.contributor.git.repos.contents.create(self.contributor.nickname, self.name, 'initial.txt', path: '', content: 'initial commit', message: 'initial commit') 
+      rescue Github::Error::ServiceError => @e
+        self.contributor.git.repos.contents.create(self.contributor.nickname, self.name, 'README.asc', path: '', content: 'An initial commit was made by blogdiggity in order to add this repo since it was empty.', message: 'Initial commit made by blogdiggity.') 
         head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
         self.sha = head_ref[:object][:sha]
       end
     end
-    
+
    def configure
       # create pages
       page_paths.each do |path|

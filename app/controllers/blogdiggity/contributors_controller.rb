@@ -3,7 +3,7 @@ require 'open-uri'
 
 module Blogdiggity
   class ContributorsController < ApplicationController
-    
+ 
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
     
     def index
@@ -66,7 +66,7 @@ module Blogdiggity
     def add_repo
       @contributor = Contributor.find(params[:contributor_id])
       @contributor.repositories.create(:name => params[:repo_name], :root_url => root_url)
-      redirect_to @contributor
+      redirect_to @contributor 
     end
 
     def remove_repo
