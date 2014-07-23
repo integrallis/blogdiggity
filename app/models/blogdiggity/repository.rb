@@ -8,8 +8,10 @@ module Blogdiggity
     belongs_to :contributor
     has_many :pages 
 
-    before_create :set_sha, unless: :skip_callbacks
-    #after_create :configure, unless: :skip_callbacks
+    before_create, :set_sha
+    after_create, :configure
+   # before_create :set_sha, unless: :skip_callbacks
+   # after_create :configure, unless: :skip_callbacks
     
     ASCIIDOC_EXTENSIONS = ['.asciidoc', '.asc', '.txt']
 
@@ -28,7 +30,7 @@ module Blogdiggity
       begin   
         head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
         self.sha = head_ref[:object][:sha]
-      rescue Github::Error::ServiceError => @e
+      rescue Github::Error::ServiceError => e
         self.contributor.git.repos.contents.create(self.contributor.nickname, self.name, 'README.asc', path: '', content: 'An initial commit was made by blogdiggity in order to add this repo since it was empty.', message: 'Initial commit made by blogdiggity.') 
         head_ref = self.contributor.git.git_data.references.get(self.contributor.nickname, self.name, 'heads/master')
         self.sha = head_ref[:object][:sha]
