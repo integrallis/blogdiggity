@@ -8,8 +8,8 @@ module Blogdiggity
     belongs_to :contributor
     has_many :pages 
 
-    before_create, :set_sha
-    after_create, :configure
+    before_create :set_sha
+    after_create :configure
    # before_create :set_sha, unless: :skip_callbacks
    # after_create :configure, unless: :skip_callbacks
     
