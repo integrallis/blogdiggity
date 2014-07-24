@@ -12,7 +12,7 @@ module Blogdiggity
               @page.rendered
             end
           
-            render :text => rendered_page, :layout => 'application'
+            render :text => rendered_page, :layout => 'default'
           else
             redirect_to :status => 404
           end
