@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
 
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- spec/*`.split("\n")
-
   s.add_dependency 'rails', '>=  3.2'
   
   s.add_dependency 'omniauth', '~> 1.1'
@@ -35,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver', '~> 2'
   s.add_development_dependency 'shoulda-matchers', '~> 2.0'
   s.add_development_dependency 'fabrication'
+  s.add_development_dependency 'faker' 
   s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'pry'
 end

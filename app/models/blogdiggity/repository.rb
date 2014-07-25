@@ -10,8 +10,8 @@ module Blogdiggity
 
     before_create :set_sha
     after_create :configure
-   # before_create :set_sha, unless: :skip_callbacks
-   # after_create :configure, unless: :skip_callbacks
+    #before_create :set_sha, unless: :skip_callbacks
+    #after_create :configure, unless: :skip_callbacks
     
     ASCIIDOC_EXTENSIONS = ['.asciidoc', '.asc', '.txt']
 

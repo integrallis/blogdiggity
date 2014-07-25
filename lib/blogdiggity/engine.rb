@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'omniauth'
 require 'omniauth-github'
 require 'github_api'
@@ -7,11 +8,7 @@ require 'font-awesome-sass-rails'
 require 'jquery-rails'
 require 'pingr'
 require 'asciidoctor'
-#require 'pry-rails'
 require 'figaro'
-#require 'fabrication'
-#require 'faker'
-#require 'database_cleaner'
 
 module Blogdiggity
   class Engine < ::Rails::Engine

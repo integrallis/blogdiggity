@@ -17,7 +17,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :test do
+group :development, :test do
   gem 'faker'
   gem 'fabrication'
   gem 'database_cleaner', git: 'git@github.com:bmabey/database_cleaner.git'
