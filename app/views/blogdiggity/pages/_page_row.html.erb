@@ -1,13 +1,11 @@
 <tr id="page-<%= page.id %>">
   <td><%= page.title %></td>
   <td><%= link_to page.slug, page.slug %></td>
-  <% if page.published %>
     <td>
   <% if page.published %>
     <%= relative_time_ago(page.published_at, 'ago') %>  
-<% end %> 
+  <% end %> 
     </td>
-
   <td><%= page.repository.contributor.nickname if page.repository && page.repository.contributor %></td>
   <td>
 	  <% unless page.published? %>
