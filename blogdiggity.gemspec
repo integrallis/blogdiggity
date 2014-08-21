@@ -25,7 +25,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 3.2.1'
   s.add_dependency 'font-awesome-sass-rails', ['~> 3.0', '>= 3.0.0.1']
   s.add_dependency 'pingr', '~> 0.0.3'
- 
+  s.add_dependency 'pg'
+  s.add_dependency 'activerecord-postgresql-adapter'
+  s.add_dependency 'unicorn'
+  s.add_dependency 'figaro'
+  s.add_dependency 'uglifier', '>= 1.0.3'
+
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 2.12.2'
   s.add_development_dependency 'forward', '~> 0.3.1'
@@ -37,4 +42,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'faker' 
   s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'database_cleaner', '~> 1.3.0'
 end

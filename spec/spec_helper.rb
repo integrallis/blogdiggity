@@ -5,6 +5,7 @@ require 'rspec/autorun'
 require 'fabrication'
 require 'database_cleaner'
 require 'faker'
+require 'pry'
 
 ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 # Requires supporting ruby files with custom matchers and macros, etc,
