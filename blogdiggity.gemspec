@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver', '~> 2'
   s.add_development_dependency 'shoulda-matchers', '~> 2.0'
   s.add_development_dependency 'fabrication'
-  s.add_development_dependency 'faker' 
+  s.add_development_dependency 'faker', '~> 1.4.3' 
   s.add_development_dependency 'pry-rails'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'database_cleaner', '~> 1.3.0'
