@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'omniauth'
 require 'omniauth-github'
 require 'github_api'
 

@@ -1,6 +1,6 @@
 module Blogdiggity
   class Page < ActiveRecord::Base
-    attr_accessible :repository_id, :slug, :published, :published_at, :extension
+    #attr_accessible :repository_id, :slug, :published, :published_at, :extension
     
     belongs_to :repository
     

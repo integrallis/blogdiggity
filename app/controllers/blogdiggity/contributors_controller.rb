@@ -116,6 +116,10 @@ module Blogdiggity
       end
       render :nothing => true, :status => 200
     end
-    
+    private
+
+    def contributor_params
+      params.require(:contributor).permit(:company, :email, :github_url, :image, :location, :name, :nickname, :provider, :repos_url, :token, :uid)
+    end
   end
 end

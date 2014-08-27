@@ -20,7 +20,7 @@ RSpec.configure do |config|
   end
 
   config.include(OmniauthMacros)
-  config.include(ControllerMacros)
+  config.include(ControllerMacros, :type => :controller)
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

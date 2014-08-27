@@ -3,7 +3,7 @@ require 'base64'
 module Blogdiggity
   class Repository < ActiveRecord::Base
     attr_accessor :root_url
-    attr_accessible :contributor_id, :name, :sha, :root_url
+    #attr_accessible :contributor_id, :name, :sha, :root_url
     
     belongs_to :contributor
     has_many :pages 

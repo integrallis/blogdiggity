@@ -9,12 +9,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="/">Blogdiggity</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container"><!-- #TODO change to container-fluid-->
+
+  <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Blogdiggity</a>
+    </div>
+    
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
             <li class="<%= active_path?(contributors_path) %>"><%= link_to "Contributors", contributors_path %></li>
             <li class="<%= active_path?(pages_path) %>"><%= link_to "Pages", pages_path %></li>
           </ul>
@@ -36,7 +46,6 @@
 
         </div><!--/.nav-collapse -->
       </div>
-    </div>
   </div>
 
   <div class="container">
