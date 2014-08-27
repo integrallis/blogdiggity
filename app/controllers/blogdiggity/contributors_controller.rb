@@ -20,17 +20,17 @@ module Blogdiggity
 
     def create
       auth = request.env["omniauth.auth"]
-      @contributor = Contributor.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s)
+      @contributor = Contributor.find_or_create_by_provider_and_uid(contributor_params[:provider] => auth['provider'],contributor_params[:uid] => auth['uid'].to_s)
       @contributor.update_attributes(
-        :name => auth['info']['name'] || '',
-        :email => auth['info']['email'] || '',
-        :nickname => auth['info']['nickname'] || '',
-        :image => auth['info']['image'] || '',
-        :github_url => auth['info']['urls']['GitHub'] || '',
-        :token => auth['credentials']['token'] || '',
-        :repos_url => auth['extra']['raw_info']['repos_url'] || '',
-        :company => auth['extra']['raw_info']['company'] || '',
-        :location => auth['extra']['raw_info']['location'] || ''
+        contributors_params[:name] => auth['info']['name'] || '',
+        contributors_params[:email] => auth['info']['email'] || '',
+        contributor_params[:nickname] => auth['info']['nickname'] || '',
+        contributors_params[:image] => auth['info']['image'] || '',
+        contributor_param[:github_url] => auth['info']['urls']['GitHub'] || '',
+        contributor_params[:token] => auth['credentials']['token'] || '',
+        contributor_params[:repos_url] => auth['extra']['raw_info']['repos_url'] || '',
+        contributor_params[:company] => auth['extra']['raw_info']['company'] || '',
+        contributor_params[:location] => auth['extra']['raw_info']['location'] || ''
       ) 
       session[:contributor_id] = @contributor.id
       respond_to do |format|
