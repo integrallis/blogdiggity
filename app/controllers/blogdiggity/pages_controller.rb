@@ -1,6 +1,7 @@
+require_dependency "blogdiggity/application_controller"
+
 module Blogdiggity
   class PagesController < ApplicationController
-    unloadable
 
     def show
       @page = Page.find_by_slug(params[:page])
@@ -12,7 +13,7 @@ module Blogdiggity
               @page.rendered
             end
           
-            render :text => rendered_page, :layout => 'post'
+            render :text => rendered_page, :layout => 'application'
           else
             redirect_to :status => 404
           end

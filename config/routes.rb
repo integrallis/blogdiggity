@@ -22,5 +22,5 @@ Blogdiggity::Engine.routes.draw do
   get "/pages/:year/:month" => "pages#by_year_and_month", :constraints => { :year => /\d{4}/, :month => /\d{1,2}/ }, :as => :pages_by_year_and_month
   get "/pages/:year/:month/:page" => "pages#show_by_year_and_month", :constraints => { :year => /\d{4}/, :month => /\d{1,2}/, :page => /[a-z0-9\-]+/ }, :as => :show_pages_by_year_and_month
     
-  get "/*page" => 'pages#show', :constraints => { :year => /\d{4}/, :month => /\d{1,2}/, :page => /[a-z0-9\-]+/ }
+  get '*page', to: 'pages#show', constraints: { :year => /\d{4}/, :month => /\d{1,2}/, :page => /[a-z0-9\_]+/ }
 end

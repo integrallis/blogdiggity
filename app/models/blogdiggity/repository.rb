@@ -3,15 +3,15 @@ require 'base64'
 module Blogdiggity
   class Repository < ActiveRecord::Base
     attr_accessor :root_url
-    #attr_accessible :contributor_id, :name, :sha, :root_url
     
     belongs_to :contributor
     has_many :pages 
 
-    before_create :set_sha
-    after_create :configure
-    #before_create :set_sha, unless: :skip_callbacks
-    #after_create :configure, unless: :skip_callbacks
+    #TODO Need to refactor this 
+    before_create(:set_sha) if Rails.env.development? || Rails.env.production?
+    after_create(:configure) if Rails.env.development? || Rails.env.production?
+    before_create(:set_sha, unless: :skip_callbacks) if Rails.env.test?
+    after_create(:configure, unless: :skip_callbacks) if Rails.env.test?
     
     ASCIIDOC_EXTENSIONS = ['.asciidoc', '.asc', '.txt']
 

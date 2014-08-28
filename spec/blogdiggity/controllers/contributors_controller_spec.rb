@@ -6,7 +6,6 @@ describe Blogdiggity::ContributorsController, :type => :controller do
   describe "DELETE remove_repo" do
 
     it "should destroy pages associated with repo"  do
-      binding.pry
       contributor_login
       @example_repo = @contributor.repositories.create(name: 'repo')     
       @example_repo.pages.create 
