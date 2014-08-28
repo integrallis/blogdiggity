@@ -1,6 +1,5 @@
 require_dependency "blogdiggity/application_controller"
 require 'open-uri'
-require 'pry'
 
 module Blogdiggity
   class ContributorsController < ApplicationController
