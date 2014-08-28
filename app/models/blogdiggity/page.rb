@@ -1,6 +1,6 @@
 module Blogdiggity
   class Page < ActiveRecord::Base
-    
+
     belongs_to :repository
     
     scope :published, where(:published => true)
