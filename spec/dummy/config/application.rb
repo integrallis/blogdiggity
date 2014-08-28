@@ -16,7 +16,7 @@ require "rails-boilerplate"
 
 module Dummy
   
- # Rails.logger = Logger.new(STDOUT)
+  Rails.logger = Logger.new(STDOUT)
   
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
