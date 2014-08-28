@@ -20,7 +20,12 @@ module Blogdiggity
 
     def create
       auth = request.env["omniauth.auth"]
-      @contributor = Contributor.find_or_create_by(provider: auth['provider'], uid: auth['uid'].to_s)
+      if Rails.version.to_i >= 4  
+        @contributor = Contributor.find_or_create_by(provider: auth['provider'], uid: auth['uid'].to_s)
+      else
+        @contributor = Contributor.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s)
+      end
+      
       @contributor.update_attributes(
         :email => auth['info']['email'] || '',
         :nickname => auth['info']['nickname'] || '',
