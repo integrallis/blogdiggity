@@ -16,8 +16,8 @@ Blogdiggity::Engine.routes.draw do
   
   get '/auth/:provider/callback' => 'contributors#create', :as => :auth_callback
   get '/auth/failure' => 'contributors#failure', :as => :auth_failure
-  root :to => "contributors#index"
-
+  root :to => "pages#index"
+  get "/home", :to => 'pages#home'
   get "/pages/:year" => "pages#by_year", :constraints => { :year => /\d{4}/ }, :as => :pages_by_year
   get "/pages/:year/:month" => "pages#by_year_and_month", :constraints => { :year => /\d{4}/, :month => /\d{1,2}/ }, :as => :pages_by_year_and_month
   get "/pages/:year/:month/:page" => "pages#show_by_year_and_month", :constraints => { :year => /\d{4}/, :month => /\d{1,2}/, :page => /[a-z0-9\-]+/ }, :as => :show_pages_by_year_and_month

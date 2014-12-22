@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1>Blogdiggity</h1>
+</div>
+<% @pages.each do |page| %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= link_to page.slug, page.slug %>
+    </div>
+  </div>
+<% end %>

@@ -3,6 +3,10 @@ require_dependency "blogdiggity/application_controller"
 module Blogdiggity
   class PagesController < ApplicationController
 
+    def home
+      @pages = Page.where(published: true)
+    end
+
     def show
       @page = Page.find_by_slug(params[:page])
       expires_in(5.minutes, public: true) unless Rails.env == "development"
