@@ -4,9 +4,9 @@
   <td><%= repo.description %></td>
   <td>
 	  <% unless Blogdiggity::Repository.find_by_name(repo.name) %>
-	    <%= button_to "Add", add_contributor_repository_path(@contributor, repo.name), :method => :post, :class => 'btn btn-success' %>
+	    <%= button_to "Add", add_contributor_repository_path(@contributor, repo.name), :method => :post, :class => 'btn btn-success sharp' %>
 	  <% else %>
-	    <%= button_to "Remove", remove_contributor_repository_path(@contributor, repo.name), :method => :delete, :class => 'btn btn-danger' %>
+	    <%= button_to "Remove", remove_contributor_repository_path(@contributor, repo.name), :method => :delete, :class => 'btn btn-danger sharp' %>
 	  <% end %>
   </td>
 </tr>

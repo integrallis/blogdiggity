@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130330185759) do
+ActiveRecord::Schema.define(version: 20141222192246) do
 
   create_table "blogdiggity_contributors", force: true do |t|
     t.string   "company"
@@ -25,8 +25,9 @@ ActiveRecord::Schema.define(version: 20130330185759) do
     t.string   "repos_url"
     t.string   "token"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "status",     default: "pending", null: false
   end
 
   add_index "blogdiggity_contributors", ["nickname"], name: "index_blogdiggity_contributors_on_nickname", unique: true
@@ -34,8 +35,8 @@ ActiveRecord::Schema.define(version: 20130330185759) do
   create_table "blogdiggity_pages", force: true do |t|
     t.integer  "repository_id"
     t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.boolean  "published"
     t.datetime "published_at"
     t.string   "extension"
@@ -47,8 +48,8 @@ ActiveRecord::Schema.define(version: 20130330185759) do
     t.integer  "contributor_id"
     t.string   "name"
     t.string   "sha"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end

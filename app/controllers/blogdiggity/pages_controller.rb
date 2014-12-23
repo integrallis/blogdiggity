@@ -17,7 +17,7 @@ module Blogdiggity
               @page.rendered
             end
           
-            render :text => rendered_page, :layout => 'blogdiggity_post'
+            render :text => rendered_page, :layout => 'application'
           else
             redirect_to :status => 404
           end

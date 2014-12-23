@@ -1,8 +1,10 @@
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 body {
   margin-top: 40px;
   padding-top: 40px;
+  background-color: #F2F2F2;
 }
 
 .comments {
@@ -13,3 +15,132 @@ body {
 .alert {
   margin-top: 10px;	
 }
+
+.btn {
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+.btn-primary {
+  background: #0099cc;
+  color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active {
+  background: #007299;
+  box-shadow: none;
+}
+
+.btn.sharp {
+  border-radius:0;
+
+}
+
+/* HOME */
+
+span.glyphicon {
+  font-size: 1.2em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* HOME -> ARTICLE */
+.blog-article {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  margin-bottom: 50px;
+  padding: 10px; 
+}
+
+.article-inner-content {
+  background-color: #ffffff;
+  border: 0 none;
+  padding: 0px 40px 10px;
+}
+
+
+.page-header {
+  margin-top: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin-bottom: 30px;
+}
+
+.article-meta {
+  margin-bottom: 30px;
+}
+
+.article-meta span {
+  margin-right: 10px;
+}
+
+.article-meta a {
+  font-size: 13px;
+  color: #6B6B6B;
+}
+
+.article-content {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: #454545;
+  font-family: roboto;
+}
+
+.article-content p {
+  margin: 0 0 30px;
+}
+
+.btn-primary {
+  font-weight: 700;
+} 
+.btn.read-more{
+  float: right;
+  border-radius: 3px;
+	border: 0 none;
+	-webkit-transition: all 0.25s ease 0s;
+}
+/* HOME -> SIDEBAR (div id="secondary") */
+
+.well {
+  background-color: #fff;
+  padding: 30px;
+  border: 1px solid #DADADA;
+  overflow: hidden;
+  clear: both;
+}
+
+.article-link {
+  color: #444;
+  text-decoration: none;
+  transition: all 0.25s ease 0s;
+  transition-property: all;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+
+}
+
+.search {
+  margin-bottom: 30px;
+}
+
+
+

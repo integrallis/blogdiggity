@@ -9,9 +9,9 @@
   <td><%= page.repository.contributor.nickname if page.repository && page.repository.contributor %></td>
   <td>
 	  <% unless page.published? %>
-	    <%= button_to "Publish", publish_page_path(page), :method => :put, :class => 'btn btn-small btn-success' %>
+	    <%= button_to "Publish", publish_page_path(page), :method => :put, :class => 'btn btn-small btn-success sharp' %>
 	  <% else %>
-	    <%= button_to "Unpublish", unpublish_page_path(page), :method => :put, :class => 'btn btn-small btn-danger' %>
+	    <%= button_to "Unpublish", unpublish_page_path(page), :method => :put, :class => 'btn btn-small btn-danger sharp' %>
 	  <% end %>
   </td>
 </tr>
