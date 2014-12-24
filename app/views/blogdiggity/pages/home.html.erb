@@ -11,14 +11,12 @@
             <span class="posted-on">
               <span class="glyphicon glyphicon-calendar"></span>
               <a href="#" rel="bookmark">
-                <time class="entry-date published" datetime="2014-12-01T10:18:43+00:00">December 1, 2014</time>
+                <%= page.published_at.to_date %>
                 </a>
             </span>
             <span class="byline">
               <span class="glyphicon glyphicon-pencil"></span>
-              <span class="author vcard">
-                <a class="url fn n" href="#">Christopher Gimmer</a>
-              </span>
+                <%= page.repository.contributor.nickname %>
             </span>			
             <span class="comments-link">
               <span class="glyphicon glyphicon-comment"></span> 
