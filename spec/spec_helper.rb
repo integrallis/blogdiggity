@@ -6,6 +6,8 @@ require 'database_cleaner'
 require 'faker'
 require 'pry'
 
+ActiveRecord::Migration.maintain_test_schema!
+
 ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
