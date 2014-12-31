@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = 'Blogdiggity; A Rails 3 & 4 Blog Engine Powered by Git'
 
   s.files       = `git ls-files`.split("\n")
-s.test_files = Dir["spec/**/*"]
+  s.test_files = Dir["spec/**/*"]
   #  s.test_files  = `git ls-files -- spec/*`.split("\n")
   s.add_dependency 'rails', '>= 3.2' 
   
