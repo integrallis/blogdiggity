@@ -3,9 +3,10 @@ require 'open-uri'
 
 module Blogdiggity
   class ContributorsController < ApplicationController
- 
+
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
-    
+    before_filter :require_active_contributor, :except => [:new, :create]
+
     def index
       @contributors = Contributor.all
 
@@ -32,8 +33,14 @@ module Blogdiggity
         :location => auth['extra']['raw_info']['location'] || ''
       ) 
       session[:contributor_id] = @contributor.id
-      respond_to do |format|
-        format.html { redirect_to @contributor, notice: 'Contributor was successfully added.' }
+      if active_contributor
+        respond_to do |format|
+          format.html { redirect_to @contributor, notice: 'Contributor was successfully added.' }
+        end
+      else
+        respond_to do |format|
+           format.html { redirect_to root_path, notice: 'Your request to become a contributor was submitted. Please await approval from the admin.' }
+        end
       end
     end
 
@@ -75,12 +82,12 @@ module Blogdiggity
       repository.destroy
       redirect_to @contributor
     end
-    
+
     def signout
       session[:contributor_id] = nil
       redirect_to root_url, :notice => "Signed out!"
     end
-    
+
     # repo webhook handler
     def webhook
       @repository = Repository.find_by_name(params[:repo_name])
@@ -90,23 +97,23 @@ module Blogdiggity
         commit.added.each do |path|
           @repository.pages.create(:slug => path)
         end if commit.added
-        
+
         # processing removed files - delete corresponding page entry
         commit.removed.each do |path|
           @repository.pages.where(:slug => path).destroy
         end if commit.removed
-        
+
         # processing modified files - invalidate the cache 
         commit.modified.each do |path|
           root_path = File.dirname(path)
           extension = File.extname(path)
           slug = (root_path == '.' ? '' : "#{root_path}/" ) + File.basename(path, extension) 
-          
+
           Rails.cache.delete(slug)
           page = Page.find_by_slug_and_extension(slug, extension)
           page.touch if page
         end if commit.modified
-        
+
         console.debug "webhook: timestamp ==> #{commit.timestamp}"
         console.debug "webhook: added ==> #{commit.added}" # ===> call repo.pages.create(:slug => path)
         console.debug "webhook: removed ==> #{commit.removed}" # ===> call Page.find_by_slug("#{params[:page]}.asciidoc").delete

@@ -70,7 +70,7 @@ module Dummy
       blogdiggity_config = File.join(Rails.root, 'config', 'blogdiggity.yml')
       if File.exists?(blogdiggity_config)
         YAML.load(File.open(blogdiggity_config)).each do |key, value|
-          ENV[key.to_s] = value
+          ENV[key.to_s] = value unless key == 'ADMIN'
         end 
       else
         Rails.logger.warn "Blogdiggity Github OAuth NOT configured!"
