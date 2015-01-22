@@ -31,7 +31,6 @@ module Blogdiggity
 
     initializer :load_admins do |app|
       config.admin = YAML.load_file(File.open('config/blogdiggity.yml'))['ADMIN']
-      binding.pry
       if config.admin
         config.admin.each do |admin|
           admin = Blogdiggity::Contributor.find_by_nickname(admin)

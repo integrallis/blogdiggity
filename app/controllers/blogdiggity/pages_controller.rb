@@ -13,11 +13,15 @@ module Blogdiggity
       if @page 
         if stale?(:etag => @page, :last_modified => @page.updated_at, :public => true)
           if @page.published? || Rails.env == "development"
-            rendered_page = Rails.cache.fetch(@page.slug) do
-              @page.rendered
+            if ENV['BLOG_CACHE'] == true
+              rendered_page = Rails.cache.fetch(@page.slug) do
+                @page.rendered
+              end
+            else
+              rendered_page = @page.rendered
             end
           
-            render :text => rendered_page, :layout => 'application'
+            render :text => rendered_page, :layout => 'blogdiggity/layouts/blogdiggity'
           else
             redirect_to :status => 404
           end

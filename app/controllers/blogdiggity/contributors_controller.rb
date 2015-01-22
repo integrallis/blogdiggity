@@ -5,7 +5,8 @@ module Blogdiggity
   class ContributorsController < ApplicationController
 
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
-    before_filter :require_active_contributor, :except => [:new, :create]
+    before_filter :require_active_contributor, :except => [:new, :create, :index]
+    before_filter :require_admin_contributor, :only => [:index]
 
     def index
       @contributors = Contributor.all

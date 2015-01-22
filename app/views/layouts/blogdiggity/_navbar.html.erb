@@ -16,7 +16,10 @@
     <ul class="nav navbar-nav">
 
       <% if active_contributor %>  
-        <li class="<%= active_path?(contributors_path) %>"><%= link_to "Contributors", contributors_path %></li>
+        <% if admin? %>
+          <li class="<%= active_path?(contributors_path) %>"><%= link_to "Contributors", contributors_path %></li>
+        <% end %> 
+
 
         <li class="<%= active_path?(pages_path) %>"><%= link_to "Pages", pages_path %></li>
     </ul>
@@ -33,8 +36,11 @@
         <li><%= link_to "Sign Out", contributor_signout_path(current_contributor), :method => :put %></li>
       </ul>
     </div>
-    <% else %>
-      <li> <%= link_to('Join/Login w/Github', new_contributor_path) %></li>
+  <% else %>
+    <ul>
+      <li><%= link_to('Join/Login As Contributor w/Github', new_contributor_path, :class => "btn btn-sm btn-primary sharp") %>
+    </li>
+    </ul>
   <% end %>
   </div><!--/.nav-collapse -->
 </div>
