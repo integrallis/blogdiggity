@@ -1,2 +1,23 @@
-<%= render 'layouts/blogdiggity/navbar' %>
-<%= yield %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @page.nil? ? 'Blogdiggity' : @page.title %></title>
+    <%= stylesheet_link_tag "blogdiggity/blogdiggity", :media => "all" %>
+
+    <meta name="description" content="<%= @page.nil? ? '' : @page.summary	 %>" />
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render "layouts/blogdiggity/navbar" %>
+    <div class="container">
+      <%= render "blogdiggity/shared/flash_message" %>
+      <div class="title">
+        HELLO
+      <%= yield %>
+      <%= render "blogdiggity/pages/comments" %>
+    </div> <!-- /container -->
+    <%= javascript_include_tag "blogdiggity/blogdiggity" %>
+  </body>
+</html>
+

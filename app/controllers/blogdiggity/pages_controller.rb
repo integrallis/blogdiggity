@@ -10,18 +10,18 @@ module Blogdiggity
     def show
       @page = Page.find_by_slug(params[:page])
       expires_in(5.minutes, public: true) unless Rails.env == "development"
+
       if @page 
         if stale?(:etag => @page, :last_modified => @page.updated_at, :public => true)
           if @page.published? || Rails.env == "development"
-            if ENV['BLOG_CACHE'] == true
+            if ENV['BLOG_CACHE'] == 'true'
               rendered_page = Rails.cache.fetch(@page.slug) do
                 @page.rendered
               end
             else
               rendered_page = @page.rendered
             end
-          
-            render :text => rendered_page, :layout => 'blogdiggity/layouts/blogdiggity'
+            render :text => rendered_page, :layout => 'layouts/blogdiggity/posts/blog_post'
           else
             redirect_to :status => 404
           end
@@ -30,7 +30,7 @@ module Blogdiggity
         redirect_to :status => 404
       end
     end
-  
+
     def index
       @pages = Page.all
 
@@ -40,26 +40,26 @@ module Blogdiggity
         format.rss
       end
     end
-    
+
     def publish
       page = Page.find(params[:page])
       page.update_attributes(:published => true, :published_at => Time.now)
-      
+
       redirect_to({:action => :index}, {:notice => "<strong>Congrats!</strong> You just published <strong>#{page.title}</strong>!".html_safe})
     end
-    
+
     def unpublish
       page = Page.find(params[:page])
       page.update_attributes(:published => false)
-      
+
       redirect_to({:action => :index}, {:alert => "<strong>Watch out!</strong> You just un-published <strong>#{page.title}</strong>!".html_safe})
     end
-    
+
     def by_year
       @pages = params[:year] ? Page.by_year_and_month(params[:year].to_i) : []
       render :index
     end    
-    
+
     def by_year_and_month
       @pages = (params[:year] && params[:month]) ? Page.by_year_and_month(params[:year].to_i, params[:month].to_i) : []
       render :index
@@ -74,7 +74,7 @@ module Blogdiggity
           rendered_page = Rails.cache.fetch(@page.slug) do
             @page.rendered
           end
-          
+
           render :text => rendered_page, :layout => true
         else
           redirect_to :status => 404
@@ -83,13 +83,13 @@ module Blogdiggity
         redirect_to :status => 404
       end
     end
-    
+
     # submit site map to all supported search engines
     def seo_submit
       for search_engine in ::Pingr::SUPPORTED_SEARCH_ENGINES
         ::Pingr::Request.new(search_engine, pages_url(format: :xml)).ping
       end
-      
+
       redirect_to({:action => :index}, {:notice => '<strong>Yay!</strong> Sitemap XML has been submitted to all supported search engines!'.html_safe})
     end
 
