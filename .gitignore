@@ -6,5 +6,6 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/config/blogdiggity.yml
+spec/dummy/config/application.yml
 Gemfile.lock
 .DS_Store
